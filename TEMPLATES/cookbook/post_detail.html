@@ -1,0 +1,65 @@
+{% extends 'cookbook/base.html' %} {% block content %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 card mb-4  mt-3 left  top">
+      <div class="card-body">
+        <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
+        <p class=" text-muted">{{ post.author }} | {{ post.created_on }} | <a href="{% url 'PostCatList' post.category.slug  %}">{{ post.category }}</a> 
+                                          | {% if user.is_anonymous %}
+                                              
+                                              {% else %}
+                                              <a class="btn btn-default" href="{% url 'post_edit' slug=post.slug %}"><i class="fas fa-pencil-alt"></i></a>
+                                            {% endif %}
+        </p>
+        <p class="card-text ">{{ post.content | safe }}</p>
+      </div>
+    </div>
+    {% block sidebar %} {% include 'cookbook/sidebar.html' %} {% endblock sidebar %}
+
+    <div class="col-md-8 card mb-4  mt-3 ">
+      <div class="card-body">
+        <!-- comments -->
+        {% with comments.count as total_comments %}
+        <h2>Всего комментариев: {{ total_comments }}</h2>
+
+        <p>
+          {% endwith %} {% for comment in comments %}
+        </p>
+
+        <div class="comments" style="padding: 10px;">
+          <p class="font-weight-bold">
+            {{ comment.name }}
+            <span class=" text-muted font-weight-normal">
+              {{ comment.created_on }}
+            </span>
+          </p>
+          {{ comment.body | linebreaks }}
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-8 card mb-4  mt-3 ">
+      <div class="card-body">
+        {% if new_comment %}
+        <div class="alert alert-success" role="alert">
+          Ваш коммент на модерации
+        </div>
+        {% else %}
+        <h3>Оставить коммент</h3>
+          <form method="post" style="margin-top: 1.3em;">
+            <div class="form-group">
+                {{ comment_form | crispy }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary  btn-lg">Подтвердить</button>
+            </div> 
+          </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

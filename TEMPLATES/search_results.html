@@ -1,0 +1,28 @@
+{% extends 'cookbook/base.html' %}
+{% load static %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+    {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 float-right">
+                <form method="POST" class="card my-4">
+                    <h5 class="card-header">Найдено</h5>
+                    <div class="card-body">
+                        <ul>
+                        {% for post in object_list %}
+                            <li>
+                            <a href="{% url 'post_detail' post.slug  %}">{{ post.title }}, {{ post.created_on }}</a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            {% block sidebar %}
+                {% include 'cookbook/sidebar.html' %}
+                {% endblock sidebar %}
+        </div>
+    </div>
+    {% endblock %}
+    
