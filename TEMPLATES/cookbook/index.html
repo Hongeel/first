@@ -46,7 +46,7 @@
       {% for post in post_list %}
       <div class="card mb-4">
         <div class="card-body">
-          <h2 class="card-title"><a href="{% url 'post_detail' post.slug  %}">{{ post.title }}</a></h2>
+          <h2 class="card-title"><a href="{% url 'post_detail' post.category.slug post.slug %}">{{ post.title }}</a></h2>
           <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} </p>
           {% if post.s_content|length > 200 %}
             <p class="card-text">{{ post.s_content|slice:":650"|safe }}...</p>
@@ -54,7 +54,7 @@
             <p class="card-text">{{ post.content|slice:":350"|safe }}...</p>
           {% endif %}
           <p class="text-right">
-            <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary">Ознакомиться</a>
+            <a href="{% url 'post_detail' post.category.slug post.slug  %}" class="btn btn-primary">Ознакомиться</a>
           </p>
         </div>
 

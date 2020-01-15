@@ -31,7 +31,7 @@ class PostCatList(generic.ListView):
         return self.model.objects.filter(category__slug=self.kwargs.get('slug'))
     
 
-def post_detail(request, slug):
+def post_detail(request, slug, category):
     template_name = 'cookbook/post_detail.html'
     post = get_object_or_404(Post, slug=slug)
     comments = post.comments.filter(active=True)
