@@ -18,15 +18,25 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from rest_framework import routers
+from mainsite import views
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+router.register(r'Category', views.CategoryViewSet)
 
 from login import views
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mainsite.urls')),
+    path('api', include(router.urls)),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('login/', views.CustomLoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name= 'logout.html'), name='logout'),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

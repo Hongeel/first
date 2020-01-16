@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'login',
     'widget_tweaks',
     'taggit',
+    'rest_framework', 
 ]
 
 MIDDLEWARE = [
@@ -119,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'ru-RU'
+LANGUAGE_CODE = 'en-EN'
 
 TIME_ZONE = 'UTC'
 
@@ -161,3 +162,23 @@ LOGIN_REDIRECT_URL = '/cookbook/'
 LOGOUT_REDIRECT_URL = '../../cookbook/'
 
 SPHINX_API_VERSION = 0x116
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest.renderers.UTF8CharsetJSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+    
+    
+}
+
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'authentication.serializers.AuthSerializer',
+}
+

@@ -7,7 +7,7 @@ from django.views.generic.base import TemplateView
 from .mixins import AjaxTemplateMixin
 
 class Index(TemplateView):
-    template_name = 'cookbook/index.html'
+    template_name = '/mainsite/index.html'
 
 class CustomLoginView(AjaxTemplateMixin, LoginView):
     template_name = 'login.html'
