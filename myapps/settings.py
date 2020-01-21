@@ -159,8 +159,8 @@ MEDIA_URL = '/media/'
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
-LOGIN_REDIRECT_URL = '/cookbook/'
-LOGOUT_REDIRECT_URL = '../../cookbook/'
+LOGIN_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = '../'
 
 SPHINX_API_VERSION = 0x116
 

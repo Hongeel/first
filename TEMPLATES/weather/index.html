@@ -8,7 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static "/assets/css/card.css" %}" />
+  <script src="{% static "js/jquery-3.2.1.js" %}" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
   </head>
   <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
@@ -19,40 +31,57 @@
         <a class="p-2 text-dark" href="#">Документация</a>
         
       </nav>
-      <a class="btn btn-outline-primary" href="#">Sign up</a>
     </div>
     <div class="container">
       <div class="row center">
-            <div class="col-sm-5 col-md-6">
-              <form method="post" action="">
-                {% csrf_token %}
-                <h4 class='display-4'>Город</h4>
-                  <div class="form-group">
-                    <select class="form-control" name="city" id="city">
-                      <option>Москва</option>
-                      <option>Тула</option>
-                      <option>Санкт-Петербург</option>
-                    </select>
-                  </div>
-                <input class="mt-2 btn btn-danger" type="submit" value="Узнать">
-              </form>
+            <div class="col-md-4">
+              <div class="card my-4">
+                  <form method="post" action="">
+                    {% csrf_token %}
+                    <h5 class='card-header'>Город</h5>
+                      {% comment %} <div class="form-group card-body">
+                        <select class="form-control" name="city" id="city">
+                          <option>Москва</option>
+                          <option>Тула</option>
+                          <option>Санкт-Петербург</option>
+                        </select>
+                      </div> {% endcomment %}
+                      <div class="form-group">
+                        <label for="city">свой вариант</label>
+                        <input type="text" class="form-control" name="city" id="city" aria-describedby="helpId" placeholder="введите город">
+                      </div>
+                    <div class="mx-auto text-center">
+                      <input class="mt-2 mb-3 btn btn-danger" type="submit" value="Узнать">
+                    </div>
+                  </form>
+              </div>
             </div>
-            <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
-                <h4 class='display-4'>Инфо</h4>
-                <div class="form-group">
+            <div class="col-md-3">
+              <div class="card my-4">
+                <h5 class='card-header'>Инфо</h5>
+                <div class="form-group card-body">
                   <b>Город:</b> {{ info.city }} </br>
                   <b>температура:</b> от {{ info.temp }} до {{ info.app_temp }} C
-                <div>
+                </div>
+              </div>
             </div>
-            
+            {% block sidebar %}
+            {% include 'sidebar.html' %}
+            {% endblock sidebar %}
       </div>
-      
+      <div class="mt-5">Просто тестировал подключение API прогноза погоды через вьюху.</div>
     </div>
-    <p class="mt-5">Просто тестировал подключение API прогноза погоды через вьюху.</p>
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script>
+  <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+  <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+  <script src="{% static "js/modal-login.js" %}"></script>
   </body>
 </html>

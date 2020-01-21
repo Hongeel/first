@@ -16,7 +16,7 @@ $(function(){
                     }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                // на случай ошибки
+                // handle response errors here
                 }
             });
         });
