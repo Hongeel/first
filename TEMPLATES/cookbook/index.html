@@ -1,26 +1,7 @@
 {% extends "cookbook/base.html" %}
 
 {% block content %}
-<style>
-  body {
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    background-color: #fdfdfd;
-  }
-  .head_text {
-    color: white;
-  }
-  .card {
-    box-shadow: 0 16px 48px #E3E7EB;
-  }
-  .ingredients-list .content-item__name {
-    position: relative;
-    display: inline;
-    font-size: 1.2em;
-    background: #fff;
-    z-index: 1;
-    padding-right: 10px;}
-</style>
+
 
 {% comment %} <header class="masthead">
   <div class="overlay"></div>
@@ -48,11 +29,11 @@
         <div class="card-body">
           <h2 class="card-title"><a href="{% url 'post_detail' post.category.slug post.slug %}">{{ post.title }}</a></h2>
           <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} </p>
-          {% if post.s_content|length > 200 %}
-            <p class="card-text">{{ post.s_content|slice:":650"|safe }}...</p>
-          {% else %}
-            <p class="card-text">{{ post.content|slice:":350"|safe }}...</p>
-          {% endif %}
+          {% comment %} {% if post.s_content|length > 200 %} {% endcomment %}
+            <p class="card-text">{{ post.s_content|slice:":650"|safe }}{{ value|stringformat:"i" }}
+          {% comment %} {% else %} {% endcomment %}
+            {% comment %} <p class="card-text">{{ post.content|slice:":350"|safe }}... {% endcomment %}
+          {% comment %} {% endif %} {% endcomment %}
           <p class="text-right">
             <a href="{% url 'post_detail' post.category.slug post.slug  %}" class="btn btn-primary">Ознакомиться</a>
           </p>

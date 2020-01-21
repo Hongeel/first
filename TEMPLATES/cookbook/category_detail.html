@@ -12,7 +12,7 @@
         <div class="card-body">
           <h1>{% block title %} {{ post.category.title }} {% endblock title %}</h1>
           <p class=" text-muted">{{ post.category.created_at }}</p> 
-          <p class="card-text ">{{ post.category.content | safe }}</p>
+          <p class="card-text ">{{ post.category.content | safe }}
         </div>
       </div>
       <div class="card mb-4">
@@ -20,9 +20,9 @@
           <h2 class="card-title"><a href="{% url 'post_detail' post.category.slug post.slug  %}">{{ post.title }}</a></h2>
           <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} </p>
           {% if post.s_content|length > 200 %}
-            <p class="card-text">{{ post.s_content|slice:":650"|safe }}...</p>
+            <p class="card-text">{{ post.s_content|slice:":650"|safe }}...
           {% else %}
-            <p class="card-text">{{ post.content|slice:":350"|safe }}...</p>
+            <p class="card-text">{{ post.content|slice:":350"|safe }}...
           {% endif %}
           <p class="text-right">
             <a href="{% url 'post_detail' post.category.slug post.slug  %}" class="btn btn-primary">Ознакомиться</a>

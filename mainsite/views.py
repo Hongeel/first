@@ -7,6 +7,7 @@ from cookbook.models import Category
 from django.contrib.auth.decorators import login_required 
 from django.utils.decorators import method_decorator 
 from django.views.generic import TemplateView
+from rest_framework import filters
 
 
 def index(request):
@@ -18,7 +19,6 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    template_name = 'login.html'
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
     @method_decorator(login_required(login_url='/api-auth/login/'))
@@ -42,6 +42,8 @@ class CategoryViewSet(viewsets.ModelViewSet):
     """
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['username', 'email']
     @method_decorator(login_required(login_url='/api-auth/login/'))
     def dispatch(self, *args, **kwargs):
         return super(CategoryViewSet, self).dispatch(*args, **kwargs)

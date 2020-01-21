@@ -12,7 +12,7 @@
                         <ul>
                         {% for post in object_list %}
                             <li>
-                            <a href="{% url 'post_detail' post.slug  %}">{{ post.title }}, {{ post.created_on }}</a>
+                            <a href="{% url 'post_detail' post.category post.slug  %}">{{ post.title }}, {{ post.created_on }}</a>
                             </li>
                         {% endfor %}
                         </ul>

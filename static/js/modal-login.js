@@ -12,17 +12,17 @@ $(function(){
                         formAjaxSubmit(form, modal);
                     } else {
                         $(modal).modal('toggle');
-                        window.location.href = '/cookbook/';
+                        window.location.href = './';
                     }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                // handle response errors here
+                // на случай ошибки
                 }
             });
         });
     }
     $('#login-button').click(function() {
-        $('#modal-login-body').load('../../../login/', function () {
+        $('#modal-login-body').load('/login/', function () {
             $('#modal-login').modal('toggle');
             formAjaxSubmit('#modal-login-body form', '#modal-login');
         });

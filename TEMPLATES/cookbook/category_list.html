@@ -1,19 +1,7 @@
 {% extends "cookbook/base.html" %}
 
 {% block content %}
-<style>
-  body {
-    font-family: "Roboto", sans-serif;
-    font-size: 18px;
-    background-color: #fdfdfd;
-  }
-  .head_text {
-    color: white;
-  }
-  .card {
-    box-shadow: 0 16px 48px #E3E7EB;
-  }
-</style>
+
 
 {% comment %} <header class="masthead">
   <div class="overlay"></div>
@@ -42,7 +30,7 @@
           <h2 class="card-title">{{ category.title }}</h2>
           <p class="card-text text-muted h6">{{ category.created_at}} </p>
 
-          <p class="card-text">{{category.content|slice:":200"|safe }}</p>
+          <p class="card-text">{{category.content|slice:":200"|safe }}
           <p class="text-right">
             <a href="{% url 'PostCatList' category.slug  %}" class="btn btn-primary">Ознакомиться</a>
           </p>
@@ -61,10 +49,10 @@
 <nav aria-label="Page navigation conatiner"></nav>
 <ul class="pagination justify-content-center">
   {% if page_obj.has_previous %}
-  <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+  <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Назад </a></li>
   {% endif %}
   {% if page_obj.has_next %}
-  <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+  <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> Вперед &raquo;</a></li>
 
   {% endif %}
 </ul>

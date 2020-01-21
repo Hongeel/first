@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'login',
     'widget_tweaks',
     'taggit',
-    'rest_framework', 
+    'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -120,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-EN'
+LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'UTC'
 
@@ -174,6 +175,7 @@ REST_FRAMEWORK = {
         'rest.renderers.UTF8CharsetJSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     
     
 }

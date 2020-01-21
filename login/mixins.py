@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 # AJAX mixin
 class AjaxTemplateMixin(object):
     def dispatch(self, request, *args, **kwargs):

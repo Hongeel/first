@@ -13,7 +13,7 @@
                                               <a class="btn btn-default" href="{% url 'post_edit' slug=post.slug %}"><i class="fas fa-pencil-alt"></i></a>
                                             {% endif %}
         </p>
-        <p class="card-text ">{{ post.content | safe }}</p>
+        <p class="card-text ">{{ post.content | safe }}
       </div>
     </div>
     {% block sidebar %} {% include 'cookbook/sidebar.html' %} {% endblock sidebar %}
