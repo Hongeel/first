@@ -38,5 +38,6 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name= 'logout.html'), name='logout'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     
+    
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

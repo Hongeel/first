@@ -1,0 +1,40 @@
+  
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+    {% block body %}
+        <form enctype="multipart/form-data" action="{% url 'new_profile' %}" method="post">
+            {% csrf_token %}
+        <div class="col-md-8">
+		<div class="card">
+			<div class="card-header">
+				<h5 class="title">Edit Profile</h5>
+			</div>
+		<div class="card-body">
+				<div class="row">
+					<div class="col-md-4 pr-md-1">
+						<div class="form-group">
+							<label for="{{ form.id_for_label }}">Дата рождения:</label>
+							{{ form.birth }}
+						</div>
+					</div>
+					<div class="col-md-4 px-md-1">
+						<div class="form-group">
+							<label for="{{ form.id_for_label }}">Немного о себе:</label>
+							{{ form.bio }}
+						</div>
+					</div>
+					<div class="col-md-4 pl-md-1">
+						<div class="form-group">
+							<label for="{{ form.id_for_label }}">Аватар:</label>
+							<div style="border:1px solid; width: 60px; height:60px;">{{ form.avatar }}</div>
+						</div>
+					</div>
+				</div>
+				</div>
+				</div>
+				</div>
+            <button type="submit" class="btn btn-fill btn-primary">Сохранить изменения</button> 
+        </form>  
+    {% endblock %}
+{% endblock %}

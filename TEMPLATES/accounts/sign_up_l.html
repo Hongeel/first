@@ -1,0 +1,70 @@
+{% block title %}Регистрация | <a href="{% url 'sign_in' %}">Вход</a>{{ super }}{% endblock %}
+
+{% block body %}
+<form method="POST" action="{% url 'sign_up' %}">
+    {% csrf_token %}
+    {% comment %} {{ form.as_p }} {% endcomment %}
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">Регистрация</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-4 pr-md-1">
+                        <div class="form-group">
+                          <label>Логин</label>
+                          {{ form.username }}
+                        </div>
+                      </div>
+                      <div class="col-md-4 px-md-1">
+                        <div class="form-group">
+                          <label>Имя</label>
+                          {{ form.first_name }}
+                        </div>
+                      </div>
+                      <div class="col-md-4 pl-md-1">
+                        <div class="form-group">
+                          <label>Фамилия</label>
+                          {{ form.last_name }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 pr-md-1">
+                        <div class="form-group">
+                          <label>Адрес электронной почты</label>
+                          {{ form.email }}
+                        </div>
+                      </div>
+                      <div class="col-md-6 px-md-1">
+                        <div class="form-group">
+                          <label>Подтвердить адрес Электронной почты</label>
+                          {{ form.verify_email }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 pr-md-1">
+                        <div class="form-group">
+                          <label>Пароль</label>
+                          {{ form.password1 }}
+                        </div>
+                      </div>
+                      <div class="col-md-6 px-md-1">
+                        <div class="form-group">
+                          <label>Подтвердить пароль</label>
+                          {{ form.password2 }}
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                  <input type="submit" class="btn btn-fill btn-primary" value="Зарегистрироваться">
+                </div>
+            </div>
+            
+        </div>
+        
+</form>
+{% endblock %}

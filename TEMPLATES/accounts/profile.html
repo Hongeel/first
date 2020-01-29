@@ -1,0 +1,59 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+{% block body %}
+    <div class="profile_block">
+      <div class="row">  
+        <div class="col-md-4">
+            <div class="card card-user">
+                <div class="card-body">
+                    <p class="card-text">
+                    <div class="author">
+                        <div class="block block-one"></div>
+                        <div class="block block-two"></div>
+                        <div class="block block-three"></div>
+                        <div class="block block-four"></div>
+                        
+                            <img class="avatar" src="{{ profile.avatar.url}}" alt="...">
+                            <h5 class="title"> {{ request.user.username }}</h5>
+                        
+                        <p class="description">
+                            {{ request.user.email }}
+                        </p>
+                    </div>
+                    </p>
+                </div>
+                    <div class="col-md-10 pr-md-1 m-auto">
+						<div class="form-group">
+							<label for="id_birth">О себе:</label>
+							<div class="">{{ profile.bio }}</div>
+						</div>
+					</div>
+                    <div class="card-footer m-auto">
+                        <a class="edit_anchor btn btn-fill btn-primary" href="{% url 'edit_profile' %}">Редактировать профиль</a>    
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card-columns">
+                    <div class="card">
+                        <img class="card-img-top" src="holder.js/100x180/" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Информация о активности</h4>
+                            <p class="card-text">Всего постов: {{ posts }}</p>
+                            <p class="card-text">Всего комментариев: {{ comments }}</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top" src="holder.js/100x180/" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Title</h4>
+                            <p class="card-text">Text</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+{% endblock %}
+{% endblock %}

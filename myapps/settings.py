@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'taggit',
     'rest_framework',
     'django_filters',
+    'app',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'myapps.urls'
+TEMPLATE_DIR = os.path.join(BASE_DIR, "TEMPLATES/")
 
 TEMPLATES = [
     {
@@ -115,6 +117,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+    {
+        'NAME': 'app.validate.ValidatePasswordCharacters'
+    }
 ]
 
 
@@ -146,12 +151,16 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR,"staticfiles")
+
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static/"),
 ]
-# STATIC_ROOT = os.path.join(BASE_DIR,"static")
 
-STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
@@ -159,8 +168,8 @@ MEDIA_URL = '/media/'
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
-LOGIN_REDIRECT_URL = '/'
-# LOGOUT_REDIRECT_URL = '../'
+LOGIN_REDIRECT_URL = "home"   # Route defined in app/urls.py
+LOGOUT_REDIRECT_URL = "home"  # Route defined in app/urls.py
 
 SPHINX_API_VERSION = 0x116
 
@@ -183,4 +192,5 @@ REST_FRAMEWORK = {
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'authentication.serializers.AuthSerializer',
 }
+
 

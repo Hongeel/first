@@ -25,24 +25,33 @@
         <h2>Всего комментариев: {{ total_comments }}</h2>
 
         <p>
-          {% endwith %} {% for comment in comments %}
+          {% endwith %} 
+      {% for comment in comments %}
         </p>
-
+      
         <div class="comments" style="padding: 10px;">
           <p class="font-weight-bold">
-            {{ comment.name }}
             <span class=" text-muted font-weight-normal">
+              {{ comment.name }}
               {{ comment.created_on }}
             </span>
           </p>
-          {{ comment.body | linebreaks }}
+          {{ comment.body | safe }}
         </div>
-
+      
         {% endfor %}
       </div>
     </div>
+    {% if user.is_anonymous %}
+      
+    
     <div class="col-md-8 card mb-4  mt-3 ">
       <div class="card-body">
+      Для того, что бы оставить комментарий, пожалуйста <button id="login-button2" type="button" class="btn btn-primary">Войдите</button>
+       или <button id="sign_up_b" type="button">зарегистрируйтесь</button>
+      {% else %}
+      <div class="col-md-8 card mb-4  mt-3 ">
+        <div class="card-body">
         {% if new_comment %}
         <div class="alert alert-success" role="alert">
           Ваш коммент на модерации
@@ -57,6 +66,7 @@
             </div> 
           </form>
         {% endif %}
+      {% endif %}
       </div>
     </div>
   </div>

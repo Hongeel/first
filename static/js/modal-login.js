@@ -27,4 +27,16 @@ $(function(){
             formAjaxSubmit('#modal-login-body form', '#modal-login');
         });
     })
+    $('#login-button2').click(function() {
+        $('#modal-login-body').load('/login/', function () {
+            $('#modal-login').modal('toggle');
+            formAjaxSubmit('#modal-login-body form', '#modal-login');
+        });
+    })
+    $('#sign_up_b').click(function() {
+        $('#modal-login-body').load('/lk/sign_up_l/', function () {
+            $('#modal-login').modal('toggle');
+            formAjaxSubmit('#modal-login-body form', '#modal-login');
+        });
+    })
   })

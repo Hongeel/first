@@ -13,7 +13,7 @@
               Вы не авторизованны. <button id="login-button" type="button" class="btn btn-primary">Войти</button>
             {% else %}
               <span class="navbar-text ml-auto mr-3">
-               Вы вошли как <strong>{{ user }}</strong>.
+               Вы вошли как <strong>{{ user }}</strong>. 
               </span>
               
               <a href="{% url 'logout' %}" id="logout-button" role="button" class="btn btn-danger">Выйти</a></br>

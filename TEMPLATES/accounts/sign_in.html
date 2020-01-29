@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+{% block title %}Войти | <a href="{% url 'sign_up' %}">Зарегистрироваться</a>{{ super }}{% endblock %}
+
+{% block body %}
+<form method="POST" action="{% url 'sign_in' %}">
+    {% csrf_token %}
+    <div class="col-md-8">
+                
+                   
+                <div class="card-body">
+                 <h5 class="title">Вход</h5>
+                <div class="row">
+                    <div class="col-md-2 px-md-1">
+                        <div class="form-group">
+                            {% comment %} <label>Логин:</label> {% endcomment %}
+                            {{ form.username }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 px-md-1">
+                        <div class="form-group">
+                            {% comment %} <label>Пароль:</label> {% endcomment %}
+                            {{ form.password }}
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-fill button-primary" value="Sign In">
+                </div>
+                </div>
+    
+</form>
+{% endblock %}
+{% endblock %}

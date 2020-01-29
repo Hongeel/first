@@ -39,9 +39,11 @@ def post_detail(request, slug, category):
     
     # Comment posted
     if request.method == 'POST':
-        comment_form = CommentForm(data=request.POST)
+        data = request.POST.copy()
+        data.update({'name':request.user.username})
+        comment_form = CommentForm(data)
         if comment_form.is_valid():
-
+            comment_form.name = request.user
             # Create Comment object but don't save to database yet
             new_comment = comment_form.save(commit=False)
             # Assign the current post to the comment
@@ -49,7 +51,7 @@ def post_detail(request, slug, category):
             # Save the comment to the database
             new_comment.save()
     else:
-        comment_form = CommentForm()
+        comment_form = CommentForm({'name':request.user.username, 'email':request.user.email})
     return render(request, template_name, {'post': post,
                                            'comments': comments,
                                            'new_comment': new_comment,

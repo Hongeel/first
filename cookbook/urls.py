@@ -3,7 +3,7 @@ from .views import post_new, post_detail, PostList, post_edit, CategoryList, Sea
 
 
 urlpatterns = [
-    path('', PostList.as_view(), name='home'),
+    path('', PostList.as_view(), name='cook'),
     path('new/', post_new, name='post_new'),
     path('catnew/', cat_new, name='cat_new'),
     path('category/', CategoryList.as_view(), name='category'),
