@@ -9,8 +9,9 @@ urlpatterns = [
     path('category/', CategoryList.as_view(), name='category'),
     path('category/<slug:slug>/', PostCatList.as_view(), name='PostCatList'),
     path('category/<category>/<slug:slug>/', post_detail, name='post_detail'),
+    path('category/<category>/<slug:slug>/edit/', post_edit, name='post_edit'),
     path('search/', SearchResultsView.as_view(), name='search_results'),
-    path('<slug:slug>/edit/', post_edit, name='post_edit'),
+    
     
 ]
 

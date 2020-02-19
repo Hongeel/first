@@ -26,10 +26,13 @@
 {% block javascripts %}
 
 <script>
-  $(document).ready(function() {
-    // Javascript method's body can be found in assets/js/demos.js
-    demo.initGoogleMaps();
-  });
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
 </script>
   
 {% endblock javascripts %}

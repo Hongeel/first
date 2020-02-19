@@ -21,11 +21,48 @@ from django.contrib.auth.decorators import login_required
 from django.forms.models import model_to_dict
 from .forms import BootstrapAuthenticationForm
 from cookbook.models import Post, Comment
+from random import randint
+from django.views.generic import TemplateView
+from chartjs.views.lines import BaseLineChartView
+from django.contrib.auth.models import User
+from django.utils import timezone
 
+
+
+class LineChartJSONView(BaseLineChartView):
+   
+    def get_labels(self):
+        """Return 7 labels for the x-axis."""
+        return  ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" ]
+
+    def get_providers(self):
+        """Return names of datasets."""
+        return ["Регистраций", "Постов", "Комментов"]
+
+    def get_data(self):
+        t = timezone.localtime(timezone.now())
+        i = 1
+        regs = []
+        posts = []
+        comments = []
+        while i <= 12:
+            regs.append([User.objects.filter(date_joined__month= i).filter(date_joined__year = t.year).count(),])
+            posts.append([Post.objects.filter(created_on__month= i).filter(created_on__year = t.year).count()])
+            comments.append([Comment.objects.filter(created_on__month= i).filter(created_on__year = t.year).count()])
+            i += 1
+            # return regs, posts, comments
+        """Return 3 datasets to plot."""
+        
+        
+        return regs, posts, comments
+
+line_chart = TemplateView.as_view(template_name='index.html')
+# line_chart_json = LineChartJSONView.as_view()
 
 # @login_required(login_url="/login/")
 def index(request):
     return render(request, "index.html")
+
 
 
 @login_required(login_url="/login/")
@@ -121,7 +158,8 @@ def sign_out(request):
 @login_required(login_url="/lk/sign_in/")
 def profile(request):
     user = request.user
-    posts = Post.objects.filter(author=user).count()
+    posts_count = Post.objects.filter(author=user).count()
+    posts = Post.objects.filter(author=user)
     comments = Comment.objects.filter(name=user).count()
     try:
         profile = Profile.objects.get(id=user.id)
@@ -130,7 +168,7 @@ def profile(request):
         return HttpResponseRedirect(
             reverse("new_profile")
         )
-    return render(request, 'accounts/profile.html', {'profile': profile, 'posts': posts, 'comments': comments})
+    return render(request, 'accounts/profile.html', {'profile': profile, 'posts_count': posts_count, 'posts':posts, 'comments': comments})
 
 
 @login_required(login_url="/accounts/sign_in/")

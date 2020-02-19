@@ -4,7 +4,7 @@ from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'status', 'category','created_on')
+    list_display = ('title', 'slug', 'status', 'category','created_on', 'author')
     list_filter = ("status", 'category')
     search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
@@ -24,5 +24,5 @@ class CommentAdmin(admin.ModelAdmin):
 
     def approve_comments(self, request, queryset):
         queryset.update(active=True)
-
+    approve_comments.short_description = "Утвердить комментарий"
 admin.site.register(Post, PostAdmin)

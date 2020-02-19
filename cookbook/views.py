@@ -40,7 +40,7 @@ def post_detail(request, slug, category):
     # Comment posted
     if request.method == 'POST':
         data = request.POST.copy()
-        data.update({'name':request.user.username})
+        data.update({'name':request.user.username, 'email':request.user.email})
         comment_form = CommentForm(data)
         if comment_form.is_valid():
             comment_form.name = request.user
@@ -51,7 +51,10 @@ def post_detail(request, slug, category):
             # Save the comment to the database
             new_comment.save()
     else:
-        comment_form = CommentForm({'name':request.user.username, 'email':request.user.email})
+        if request.user.is_authenticated:
+            comment_form = CommentForm({'name':request.user.username, 'email':request.user.email})
+        else:
+            comment_form = CommentForm({'name':request.user.username,})
     return render(request, template_name, {'post': post,
                                            'comments': comments,
                                            'new_comment': new_comment,
@@ -66,7 +69,7 @@ def post_new(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            return redirect('post_detail', slug=post.slug)
+            return redirect('post_detail', category=post.category, slug=post.slug)
     else:
         form = PostForm()
     return render(request, 'cookbook/post_edit.html', {'form': form})
@@ -85,7 +88,7 @@ def cat_new(request):
         form = CatForm()
     return render(request, 'cookbook/category_edit.html', {'form': form})
 
-def post_edit(request, slug):
+def post_edit(request, slug, category):
     post = get_object_or_404(Post, slug=slug)
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
@@ -94,7 +97,7 @@ def post_edit(request, slug):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            return redirect('post_detail', slug=post.slug)
+            return redirect('post_detail', category=post.category, slug=post.slug)
     else:
         form = PostForm(instance=post)
     return render(request, 'cookbook/post_edit.html', {'form': form})

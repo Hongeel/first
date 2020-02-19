@@ -6,6 +6,7 @@ Copyright (c) 2019 - present AppSeed.us
 
 from django.urls import path, re_path
 from . import views
+from .views import LineChartJSONView
 
 urlpatterns = [
     # Matches any html file 
@@ -13,6 +14,7 @@ urlpatterns = [
 
     # The home page
     path('', views.index, name='home'),
+    path('LineChartJSONView/', LineChartJSONView.as_view(), name='line_chart_json'),
     path('sign_in/', views.sign_in, name='sign_in'),
     path('sign_up/', views.sign_up, name='sign_up'),
     path('sign_up_l/', views.sign_up_l, name='sign_up_l'),

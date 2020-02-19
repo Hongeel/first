@@ -1,5 +1,5 @@
 {% extends 'cookbook/base.html' %} {% block content %}
-{% load crispy_forms_tags %}
+{% comment %} {% load crispy_forms_tags %} {% endcomment %}
 
 <div class="container">
   <div class="row">
@@ -10,7 +10,7 @@
                                           | {% if user.is_anonymous %}
                                               
                                               {% else %}
-                                              <a class="btn btn-default" href="{% url 'post_edit' slug=post.slug %}"><i class="fas fa-pencil-alt"></i></a>
+                                              <a class="btn btn-default" href="{% url 'post_edit' post.category.slug post.slug %}"><i class="fas fa-pencil-alt"></i></a>
                                             {% endif %}
         </p>
         <p class="card-text ">{{ post.content | safe }}
@@ -42,15 +42,8 @@
         {% endfor %}
       </div>
     </div>
-    {% if user.is_anonymous %}
-      
-    
+    {% if user.is_authenticated %}
     <div class="col-md-8 card mb-4  mt-3 ">
-      <div class="card-body">
-      Для того, что бы оставить комментарий, пожалуйста <button id="login-button2" type="button" class="btn btn-primary">Войдите</button>
-       или <button id="sign_up_b" type="button">зарегистрируйтесь</button>
-      {% else %}
-      <div class="col-md-8 card mb-4  mt-3 ">
         <div class="card-body">
         {% if new_comment %}
         <div class="alert alert-success" role="alert">
@@ -60,13 +53,25 @@
         <h3>Оставить коммент</h3>
           <form method="post" style="margin-top: 1.3em;">
             <div class="form-group">
-                {{ comment_form | crispy }}
+                <p style="display:none">{{ comment_form.name }}</p>
+                <p style="display:none">{{ comment_form.email }}</p>
+                <div class="form-group">
+                  {{ comment_form.body }}
+                </div> 
                 {% csrf_token %}
                 <button type="submit" class="btn btn-primary  btn-lg">Подтвердить</button>
             </div> 
           </form>
         {% endif %}
-      {% endif %}
+      
+    {% else %}
+      <div class="col-md-8 card mb-4  mt-3 ">
+        <div class="card-body">
+        Для того, что бы оставить комментарий, пожалуйста <button id="login-button2" type="button" class="btn btn-primary">Войдите</button>
+        или <button id="sign_up_b" type="button">зарегистрируйтесь</button>
+        </div>
+      </div>
+    {% endif %}
       </div>
     </div>
   </div>
